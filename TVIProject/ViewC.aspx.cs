@@ -1,0 +1,347 @@
+﻿using System;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+
+namespace TVIProject
+{
+    public partial class ViewC : System.Web.UI.Page
+    {
+        public SqlConnection conn = new SqlConnection(@"Data Source=.;Initial Catalog=TVI;Integrated Security=True");
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            //string connstr = "Data Source=.;Initial Catalog=Data;Integrated Security=True";
+            //SqlConnection conn = new SqlConnection(connstr);
+            //conn.Open();
+
+
+            //SqlCommand cmd = new SqlCommand("SELECT [QC1],[QC2] ,[QC3_OP1] ,[QC3_OP2] ,[QC3_OP3] ,[QC3_OP4] ,[QC3_OP5] ,[QC3_OP6] ,[QC3_OP7] ,[QC3_OP8] ,[QC3_OP9],[QC3_OP10] ,[QC4_OP1] ,[QC4_OP2] ,[QC5_OP1] ,[QC5_OP2] ,[QC6_OP1] ,[QC6_OP2] ,[QC6_OP3] ,[QC6_OP4] ,[QC7_OP1] ,[QC7_OP2] ,[QC8_OP1] ,[QC8_OP2] ,[QC8_OP3] ,[QC9_OP1] ,[QC9_OP2] ,[QC9_OP3] ,[QC9_OP4] ,[QC9_OP5] ,[QC9_OP6] ,[QC9_OP7] ,[QC9_OP8] ,[QC9_OP9] ,[QC10_OP1] ,[QC10_OP2] , [QC10_OP3] ,[QC10_OP4],[QC10_OP5] ,[QC10_OP6] ,[QC10_OP7] ,[QC10_OP8] ,[QC10_OP9] ,[QC11_OP1],[QC11_OP2] ,[QC11_OP3] ,[QC12_OP1] ,[QC12_OP2] ,[QC12_OP3] ,[QC12_OP4] ,[QC12_OP5] ,[QC12_OP6], [QC12_OP7] ,[QC12_OP8] ,[QC13_OP1] ,[QC13_OP2] ,[QC14_OP1] ,[QC14_OP2] ,[QC14_OP3] ,[QC15_OP1],[QC15_OP2] ,[QC15_OP3] ,[QC15_OP4] ,[QC15_OP5] ,[QC16_OP1] ,[QC16_OP2] ,[QC16_OP3] ,[QC17_OP1], [QC17_OP2] ,[QC17_OP3] ,[QC17_OP4] ,[QC17_OP5] ,[QC18_OP1] ,[QC18_OP2] ,[QC18_OP3] ,[QC19] ,[QC20] ,[QC21] ,[QC22_OP1] ,[QC22_OP2] ,[QC22_OP3] FROM [dbo].[Que_FC]");
+            //cmd.CommandType = System.Data.CommandType.Text;
+            //cmd.Connection = conn;
+
+            //string temp = "";
+
+
+            //SqlDataReader reader = cmd.ExecuteReader();
+            //while (reader.Read())
+            //{
+            //    temp += "جواب دہندہ کا نا م کیا ہے؟";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC1"].ToString();
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += "جواب دہندہ کی عمر کتنی ہے:(سال میں لکھیں  ";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC2"].ToString();
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += "جوابدہندہ کا بچے کے ساتھ کیارشتہ ہے؟";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC3_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC3_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC3_OP3"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC3_OP4"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC3_OP5"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC3_OP6"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC3_OP7"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC3_OP8"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC3_OP9"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC3_OP10"].ToString();
+            //    temp += "<br/>";
+            //    temp += "کیا بچہ وی آئی آر بینڈ کے ساتھ آیا ہے؟";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC4_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC4_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += "کیا وی آئی آر بینڈ بچے کے ٹخنے پر تھا ؟(فارم بھرنے والا وی آئی آر بینڈ کا مشاہدہ کر کے خود جوابات منتخب کرے)";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC5_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC5_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += "وی آئی آر بینڈ کہاں ہے؟";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC6_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC6_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC6_OP3"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC6_OP4"].ToString();
+            //    temp += "<br/>";
+            //    temp += "بینڈ کب کھویا؟";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC7_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC7_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += "کیاآپ کے خیال میں اس مرتبہ آپ کے بچے کو بروقت حفاظتی ٹیکے لگے ہیں؟";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC8_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC8_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC8_OP3"].ToString();
+            //    temp += "<br/>";
+            //    temp += "بروقت حفاظتی ٹیکے نہ لگنے کی کیا وجہ ہے؟";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC9_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC9_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC9_OP3"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC9_OP4"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC9_OP5"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC9_OP6"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC9_OP7"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC9_OP8"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC9_OP9"].ToString();
+            //    temp += "<br/>";
+            //    temp += " وی آئی آر بینڈ کس حالت میں ہے؟(فارم بھرنے والا وی آئی آر بینڈ کا مشاہدہ کر کے خود جوابات منتخب کرے، ایک سے زائد جوابات منتخب کئے جاسکتے ہیں)";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC10_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC10_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC10_OP3"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC10_OP4"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC10_OP5"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC10_OP6"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC10_OP7"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC10_OP8"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC10_OP9"].ToString();
+            //    temp += "<br/>";
+            //    temp += "کیا پچھلے چھ ہفتوں میں کسی بھی وقت وی آئی آر بینڈ کو بچے کے ٹخنے سے اتارا گیاتھا؟";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC11_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC11_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC11_OP3"].ToString();
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += "VIRبینڈ ٹخنے سے اتارنے کی وجہ کیا تھی؟(ایک سے زائد جوابات منتخب کئے جا سکتے ہیں)";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC12_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC12_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC12_OP3"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC12_OP4"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC12_OP5"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC12_OP6"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC12_OP7"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC12_OP8"].ToString();
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += "کیا وی آئی آر بینڈ اپنے مقررہ وقت میں اختتامی مقام تک پہنچ گیا ہے؟(فارم بھرنے والا وی آئی آر بینڈ کا مشاہدہ کر کے خود جوابات منتخب کرے)";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC13_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC13_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += "کیا وی آئی آر بینڈ سے بروقت حفاظتی ٹیکے لگوانے کی یاد دہانی ہوئی؟";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC14_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC14_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC14_OP3"].ToString();
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += "وی آئی آر بینڈ سے کس طرح یاد دہانی ہوئی؟";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC15_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC15_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC15_OP3"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC15_OP4"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC15_OP5"].ToString();
+            //    temp += "<br/>";
+            //    temp += "کیا وی آئی آر بینڈ کی وجہ سے بچے کو کوئی پریشانی ہوئی ؟";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC16_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC16_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC16_OP3"].ToString();
+            //    temp += "<br/>";
+            //    temp += "بچے کو وی آئی آر بینڈ کی وجہ سے کس قسم کی پریشانی ہوئی تھی ؟";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC17_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC17_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC17_OP3"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC17_OP4"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC17_OP5"].ToString();
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += "کیا جواب دہندہ بچے کو وی آئی آر بینڈ دوبارہ پہنانے پر رضامند ہیں؟";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC18_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC18_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC18_OP3"].ToString();
+            //    temp += "<br/>";
+            //    temp += "(دیئے جانے والے نئے وی آئی آر بینڈ کا سیریل نمبر کیا ہے : (000)";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC19"].ToString();
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += "ویکسینشن کی متوقع تاریخ کیا تھی:(سال، ماہ ، دن)";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC20"].ToString();
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += "آج کی تاریخ لکھیں جب ویکسین لگائی گئی ہے: (سال ، ماہ ، دن )";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC21"].ToString();
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += ":لگنےوالی ویکسینزکانام لکھیں";
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+            //    temp += reader["QC22_OP1"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC22_OP2"].ToString();
+            //    temp += "<br/>";
+            //    temp += reader["QC22_OP3"].ToString();
+            //    temp += "<br/>";
+            //    temp += "<br/>";
+
+            //}
+
+            //conn.Close();
+
+            //Label1.Text = temp;
+        }
+
+        protected void Button1_Click(object sender, System.EventArgs e)
+        {
+            SqlCommand com;
+            string str;
+            conn.Open();
+            str = "select * from FormC where id='" + regnum.Text.Trim() + "'";
+            com = new SqlCommand(str, conn);
+
+
+
+            SqlDataReader reader = com.ExecuteReader();
+            if (reader.Read())
+            {
+                Label2.Text = reader["Q1"].ToString();
+                Label3.Text = reader["C1"].ToString();
+                Label4.Text = reader["Q2"].ToString();
+                Label5.Text = reader["C2"].ToString();
+                Label6.Text = reader["Q3"].ToString();
+                Label7.Text = reader["C3"].ToString();
+                Label8.Text = reader["Q4"].ToString();
+                Label9.Text = reader["C4"].ToString();
+                Label10.Text = reader["Q5"].ToString();
+                Label11.Text = reader["C5"].ToString();
+                Label12.Text = reader["Q6"].ToString();
+                Label13.Text = reader["C6"].ToString();
+                Label14.Text = reader["Q7"].ToString();
+                Label15.Text = reader["C7"].ToString();
+                Label16.Text = reader["Q8"].ToString();
+                Label17.Text = reader["C8"].ToString();
+                Label18.Text = reader["Q9"].ToString();
+                Label19.Text = reader["C9"].ToString();
+                Label20.Text = reader["Q10"].ToString();
+                Label21.Text = reader["C10"].ToString();
+                Label26.Text = reader["Q11"].ToString();
+                Label27.Text = reader["C11"].ToString();
+                Label28.Text = reader["Q12"].ToString();
+                Label29.Text = reader["C12"].ToString();
+                Label30.Text = reader["Q13"].ToString();
+                Label31.Text = reader["C13"].ToString();
+                Label32.Text = reader["Q14"].ToString();
+                Label33.Text = reader["C14"].ToString();
+                Label34.Text = reader["Q15"].ToString();
+                Label35.Text = reader["C15"].ToString();
+                Label36.Text = reader["Q16"].ToString();
+                Label37.Text = reader["C16"].ToString();
+                Label42.Text = reader["Q17"].ToString();
+                Label43.Text = reader["C17"].ToString();
+                Label44.Text = reader["Q18"].ToString();
+                Label45.Text = reader["C18"].ToString();
+                Label46.Text = reader["Q19"].ToString();
+                Label47.Text = reader["C19"].ToString();
+                Label48.Text = reader["Q20"].ToString();
+                Label49.Text = reader["C21"].ToString();
+                Label49.Text = reader["C22"].ToString();
+
+                reader.Close();
+                conn.Close();
+            }
+
+        }
+    }
+}
